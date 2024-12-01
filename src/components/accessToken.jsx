@@ -6,3 +6,5 @@ export default function Component() {
 
   return <div>Access Token: {accessToken}</div>;
 }
+
+// доделать
