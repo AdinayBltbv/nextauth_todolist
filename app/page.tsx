@@ -1,13 +1,11 @@
-import Clone from "@/components/Clone";
-import TodoistClone from "@/components/TodoistClone";
-import SignIn from "@/components/sign-in";
+import SignIn from "../components/sign-in";
+import TodoistClone from "../components/TodoistClone";
 
 export default function Home() {
   return (
     <div>
       <TodoistClone />
-      <SignIn/>
-      
+      <SignIn />
     </div>
   );
 }
