@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { Trash2, Check, Edit } from "lucide-react";
+import { Input } from "./ui/input";
+import { Button } from "./ui/button";
 
 interface Task {
   id: number;
@@ -46,11 +46,11 @@ export default function TaskItem({
           <Input
             type="text"
             value={localText}
-            onChange={(e) => setLocalText(e.target.value)} // Update local text
+            onChange={(e) => setLocalText(e.target.value)}
             className="mr-2"
           />
           <Button
-            onClick={handleSave} // Save changes when clicking this button
+            onClick={handleSave}
             variant="outline"
             size="icon"
             aria-label="Save changes"
@@ -58,7 +58,7 @@ export default function TaskItem({
             <Check className="w-4 h-4 text-green-500" />
           </Button>
           <Button
-            onClick={() => onCancelEditing(task.id)} // Cancel editing
+            onClick={() => onCancelEditing(task.id)}
             variant="outline"
             size="icon"
             aria-label="Cancel editing"
