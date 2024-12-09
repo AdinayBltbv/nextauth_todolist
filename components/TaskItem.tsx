@@ -46,11 +46,11 @@ export default function TaskItem({
           <Input
             type="text"
             value={localText}
-            onChange={(e) => setLocalText(e.target.value)}
+            onChange={(e) => setLocalText(e.target.value)} // Update local text
             className="mr-2"
           />
           <Button
-            onClick={handleSave}
+            onClick={handleSave} // Save changes when clicking this button
             variant="outline"
             size="icon"
             aria-label="Save changes"
@@ -58,7 +58,7 @@ export default function TaskItem({
             <Check className="w-4 h-4 text-green-500" />
           </Button>
           <Button
-            onClick={() => onCancelEditing(task.id)}
+            onClick={() => onCancelEditing(task.id)} // Cancel editing
             variant="outline"
             size="icon"
             aria-label="Cancel editing"
