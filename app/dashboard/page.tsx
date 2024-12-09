@@ -1,7 +1,7 @@
 import React from "react";
-import { Navbar } from "@/components/navbar";
-import { getData } from "@/actions/todoAction";
 import TodoistClone from "../../components/TodoistClone";
+import { getData } from "../../actions/todoAction";
+import { Navbar } from "../../components/navbar";
 
 export default async function Dashboard() {
   const data = await getData();
