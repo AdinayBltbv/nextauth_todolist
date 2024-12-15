@@ -21,11 +21,21 @@ export default function TodoistClone() {
   }
 
   if (status === "unauthenticated") {
-    return <p>You need to be logged in to access your tasks.</p>;
+    return (
+      <div className=" flex items-center justify-center">
+        <p className="text-lg font-semibold">
+          You need to be logged in to access your tasks.
+        </p>
+      </div>
+    );
   }
 
   if (!session) {
-    return <p>Unauthorized. Please log in.</p>;
+    return (
+      <div className="flex items-center justify-center">
+        <p className="text-lg font-semibold">Unauthorized. Please log in.</p>
+      </div>
+    );
   }
 
   const addTask = (text: string) => {
