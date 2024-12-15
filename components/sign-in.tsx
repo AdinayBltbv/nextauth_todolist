@@ -9,24 +9,22 @@ export default function SignIn() {
   if (session) {
     console.log(session);
     return (
-      <Card className="mx-auto mt-4 flex items-center justify-center">
-        <Card className="w-full max-w-md mx-4">
-          <CardHeader>
-            <h2 className="text-lg font-bold">
-              Signed in as {session.user?.email || "No email available"}
-            </h2>
-          </CardHeader>
-          <CardContent>
-            <Button onClick={() => signOut()}>Sign out</Button>
-          </CardContent>
-        </Card>
+      <Card className="w-screen my-4 flex flex-col items-center justify-center max-w-md mx-auto">
+        <CardHeader>
+          <h2 className="text-lg font-bold">
+            Signed in as {session.user?.email || "No email available"}
+          </h2>
+        </CardHeader>
+        <CardContent>
+          <Button onClick={() => signOut()}>Sign out</Button>
+        </CardContent>
       </Card>
     );
   }
 
   return (
-    <div className="h-screen flex items-center justify-center">
-      <Card className="w-full max-w-md mx-4">
+    <div className="my-11 flex items-center justify-center">
+      <Card className="w-full max-w-md mx-4 my-auto">
         <CardHeader>
           <h2 className="text-lg font-bold text-center">Not signed in</h2>
         </CardHeader>

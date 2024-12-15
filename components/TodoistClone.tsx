@@ -1,48 +1,43 @@
 "use client";
 
-import { useSession } from "next-auth/react";
 import { useState } from "react";
 import TaskForm from "./TaskForm";
 import TaskList from "./TaskList";
 
-interface Task {
-  id: number;
-  text: string;
-  completed: boolean;
-  isEditing: boolean;
-}
+import { todoType } from "../types/todoType";
+
+import {
+  addTodo,
+  deleteTodo,
+  editTodo,
+  toggleTodo,
+} from "../actions/todoAction";
+import { useSession } from "next-auth/react";
 
 export default function TodoistClone() {
   const { data: session, status } = useSession();
-  const [tasks, setTasks] = useState<Task[]>([]);
+  const [tasks, setTasks] = useState<todoType[]>([]); // Используем todoType вместо Task
 
   if (status === "loading") {
-    return <p>Loading...</p>;
+    return <p className="text-center">Loading...</p>;
   }
 
   if (status === "unauthenticated") {
     return (
-      <div className=" flex items-center justify-center">
-        <p className="text-lg font-semibold">
-          You need to be logged in to access your tasks.
-        </p>
-      </div>
+      <p className="text-center ">
+        You need to be logged in to access your tasks.
+      </p>
     );
   }
 
   if (!session) {
-    return (
-      <div className="flex items-center justify-center">
-        <p className="text-lg font-semibold">Unauthorized. Please log in.</p>
-      </div>
-    );
+    return <p className="text-center">Unauthorized. Please log in.</p>;
   }
 
   const addTask = (text: string) => {
-    setTasks([
-      ...tasks,
-      { id: Date.now(), text, completed: false, isEditing: false },
-    ]);
+    const id = (tasks.at(-1)?.id || 0) + 1;
+    setTasks([...tasks, { id, text, completed: false, isEditing: false }]);
+    addTodo(id, text);
   };
 
   const toggleTask = (id: number) => {
@@ -51,10 +46,12 @@ export default function TodoistClone() {
         task.id === id ? { ...task, completed: !task.completed } : task
       )
     );
+    toggleTodo(id);
   };
 
   const deleteTask = (id: number) => {
     setTasks(tasks.filter((task) => task.id !== id));
+    deleteTodo(id);
   };
 
   const editTask = (id: number, newText: string) => {
@@ -63,6 +60,7 @@ export default function TodoistClone() {
         task.id === id ? { ...task, text: newText, isEditing: false } : task
       )
     );
+    editTodo(id, newText);
   };
 
   const startEditing = (id: number) => {
@@ -82,7 +80,7 @@ export default function TodoistClone() {
   };
 
   return (
-    <div className="max-w-lg mx-auto mt-10 p-6 bg-white rounded-lg shadow-lg">
+    <div className="max-w-md mx-auto mt-10 p-6 bg-white rounded-lg shadow-lg">
       <h1 className="text-2xl font-bold mb-4 text-gray-800">Todoist Clone</h1>
       <TaskForm onAddTask={addTask} />
       <TaskList
