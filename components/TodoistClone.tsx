@@ -14,13 +14,9 @@ import {
 } from "../actions/todoAction";
 import { useSession } from "next-auth/react";
 
-interface Props {
-  todos: todoType[];
-}
-
 export default function TodoistClone() {
   const { data: session, status } = useSession();
-  const [tasks, setTasks] = useState<Task[]>([]);
+  const [tasks, setTasks] = useState<todoType[]>([]); // Используем todoType вместо Task
 
   if (status === "loading") {
     return <p>Loading...</p>;
@@ -36,7 +32,7 @@ export default function TodoistClone() {
 
   const addTask = (text: string) => {
     const id = (tasks.at(-1)?.id || 0) + 1;
-    setTasks([...tasks, { id: id, text, completed: false, isEditing: false }]);
+    setTasks([...tasks, { id, text, completed: false, isEditing: false }]);
     addTodo(id, text);
   };
 
