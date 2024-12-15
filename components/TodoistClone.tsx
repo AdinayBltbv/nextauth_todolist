@@ -12,13 +12,27 @@ import {
   editTodo,
   toggleTodo,
 } from "../actions/todoAction";
+import { useSession } from "next-auth/react";
 
 interface Props {
   todos: todoType[];
 }
 
-export default function TodoistClone({ todos }: Props) {
-  const [tasks, setTasks] = useState<todoType[]>(todos);
+export default function TodoistClone() {
+  const { data: session, status } = useSession();
+  const [tasks, setTasks] = useState<Task[]>([]);
+
+  if (status === "loading") {
+    return <p>Loading...</p>;
+  }
+
+  if (status === "unauthenticated") {
+    return <p>You need to be logged in to access your tasks.</p>;
+  }
+
+  if (!session) {
+    return <p>Unauthorized. Please log in.</p>;
+  }
 
   const addTask = (text: string) => {
     const id = (tasks.at(-1)?.id || 0) + 1;
