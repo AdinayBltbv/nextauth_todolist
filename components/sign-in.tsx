@@ -2,7 +2,7 @@
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 
-import { useSession, signIn, signOut } from "next-auth/react";
+import { useSession, signIn } from "next-auth/react";
 import { Separator } from "./ui/separator";
 import {
   Card,
@@ -20,9 +20,10 @@ export default function SignIn() {
 
   useEffect(() => {
     if (status === "authenticated") {
+      console.log("Logged in user:", session?.user);
       router.push("/dashboard"); // Change '/dashboard' to your desired route
     }
-  }, [status, router]);
+  }, [status, router, session]);
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">

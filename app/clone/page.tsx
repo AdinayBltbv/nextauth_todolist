@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { Trash2, Check, Plus, Edit } from "lucide-react";
 import { Button } from "../../components/ui/button";
-import { Input } from "@/components/ui/input";
+import { Input } from "../../components/ui/input";
 
 interface Task {
   id: number;
