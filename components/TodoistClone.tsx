@@ -19,15 +19,19 @@ export default function TodoistClone() {
   const [tasks, setTasks] = useState<todoType[]>([]); // Используем todoType вместо Task
 
   if (status === "loading") {
-    return <p>Loading...</p>;
+    return <p className="text-center">Loading...</p>;
   }
 
   if (status === "unauthenticated") {
-    return <p>You need to be logged in to access your tasks.</p>;
+    return (
+      <p className="text-center ">
+        You need to be logged in to access your tasks.
+      </p>
+    );
   }
 
   if (!session) {
-    return <p>Unauthorized. Please log in.</p>;
+    return <p className="text-center">Unauthorized. Please log in.</p>;
   }
 
   const addTask = (text: string) => {
